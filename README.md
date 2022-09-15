@@ -28,3 +28,57 @@ In order to achieve the goals of this project, a variety of sensors are used tha
 The platform chosen for implementation of this project is Raspberry Pi OS (also known as: "Raspbian") ![image](https://user-images.githubusercontent.com/105777016/190320285-f11e5c6c-2ca5-47d7-9449-0cd0f7c12719.png). The controller was programmed using the Python programming language, version 3.7.3. This programming language is the optimized and recommended language for working with this controller. For the Arduino nano controller the platform is Arduino IDE and the programming language for this controller is C++. OpenCV version 3.2 was used for the image processing operations.
 
 OpenCV (Open-Source Computer Vision Library) - is a set of libraries for computer vision and image processing distributed as open source.
+
+# Software design
+
+Sensors
+• For sensors: HC-SR04 (ultrasonic distance sensor) and LDR (light sensitive resistor) a suitable algorithm was written in the Arduino nano controller. The algorithm of the ultrasonic distance sensor frequently checks what the distance is called according to the principle of the sensor's operation (detailed later in this document). The LDR's algorithm allows sampling of the illumination intensity from the digital pin of the sensor so that the measurement result will lead to one of two options: Illuminated or dark, according to a set threshold value.
+
+ Photography and image processing
+ 
+ 
+
+• The controller (Raspberry Pi) is responsible for processing the data from the camera. When the user clicks the photo button, the controller with the help of the camera will take a picture. Next, it must locate the object the user photographed and characterize its color.
+
+# Communication
+
+The Arduino nano controller is responsible for receiving input from the user via the buttons and printing to the LCD screen. The communication between the Arduino nano controller and the Raspberry Pi controller will be done through a USB connector and the communication will be done by writing and reading through the Serial port.
+Serial communication is used to transfer information bidirectionally between the two controllers. The information passes serially, one bit at a time. In fact, serial communication between the Arduino Nano controller and the Raspberry Pi controller uses the UART (Universal Asynchronous) protocol Reception and Transmission.) The simplest and most convenient way to have serial communication between the two controllers is through a USB (Universal Serial Bus) cable that connects the two.
+On the Arduino nano controller - you can use hardware interrupts. These interrupts will be used to operate the system buttons, the Arduino nano controller supports 2 hardware interrupts - therefore the device will have 2 buttons to operate the system. As mentioned before, after pressing one of the buttons the information will be transferred from the Arduino serially to the Raspberry Pi using on the USB cable connecting the two.
+
+The data transfer rate on the USB cable is set to 9600 bits per second (default value).
+try:
+    ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+except:
+    ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=1)
+ser.flush()
+
+By using the Serial library, I defined the communication ports and their speed as seen in the above code section.
+In the iterative part (loop), the Arduino in each iteration will check whether information is sent in the Serial monitor, I will demonstrate a case where a green object was detected in the camera lens:
+ Here a test is carried out to see if information is sent in the Serial monitor:
+void loop() {
+  // Set the cursor to column 0, line 1 in the LCD
+  if(Serial.available() > 0) {
+    String data = Serial.readStringUntil('\n');
+    cnt = data.toInt();
+    temp = true;
+  }
+
+If a green object is detected, the Raspberry Pi controller will send the corresponding index to the Arduino controller (in this case, index number 1):
+  elif text == "green":
+            idx = 1
+            
+# Hardware design
+
+Camera:
+The chosen camera is the Raspberry Pi Camera Board V1.3. This camera has a dedicated socket in the Raspberry Pi controller, so it is recommended and convenient to work with this controller.
+
+Several technical parameters:
+- The camera resolution is 5 megapixels.
+- The maximum image resolution is 1944X2592.
+- Viewing angle: 65 degrees.
+- The connector type is 15-pin MIPI Camera Serial Interface.
+
+This camera is suitable for the needs of this project and the images it produces are clear enough to be analyzed.
+
+Sensors:     
