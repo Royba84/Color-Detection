@@ -73,6 +73,8 @@ If a green object is detected, the Raspberry Pi controller will send the corresp
 Camera:
 The chosen camera is the Raspberry Pi Camera Board V1.3. This camera has a dedicated socket in the Raspberry Pi controller, so it is recommended and convenient to work with this controller.
 
+![image](https://user-images.githubusercontent.com/105777016/190323081-c7775f8c-0210-42fb-8f02-a06b2eae8f14.png)
+
 Several technical parameters:
 - The camera resolution is 5 megapixels.
 - The maximum image resolution is 1944X2592.
@@ -82,3 +84,10 @@ Several technical parameters:
 This camera is suitable for the needs of this project and the images it produces are clear enough to be analyzed.
 
 Sensors:     
+
+- Ultrasonic distance sensor - HC-SR04: ![image](https://user-images.githubusercontent.com/105777016/190323042-7425bae4-0509-44a3-8859-55baffe5b4b8.png)
+allows to measure the distance from the camera lens to the object. This sensor is installed close to the camera lens in order to find the distance of the object from the lens and not necessarily from the device itself. The sensor will make sure that the distance of the lens does not exceed one meter from the camera lens and will be connected directly to the GPIO (General Purpose Input/Output) of the Raspberry Pi controller.
+
+- Lighting sensor (module) - LDR (Light Dependent Resistor): ![image](https://user-images.githubusercontent.com/105777016/190323059-b072b8f5-1b63-4281-9b25-e8bb9ababd83.png)
+ This sensor is actually a resistor whose resistance changes according to the intensity of the illumination on its surface. With the help of a potentiometer installed on the module, it is possible to determine the threshold level from which any illuminance will be considered bright or dark. The measured illuminance is analog and converted to digital using the module to which the sensor is soldered, this feature makes working with this module easy since the Raspberry Pi controller has no analog pins. If the read illuminance value is below the set threshold (ie dark) the flash lighting system made of white LED lights will be turned on.
+
