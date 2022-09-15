@@ -1,5 +1,5 @@
-# Color-Detection
-Final B.Sc. Project, Color detection device using Image processing / Roy Ben Avraham 2021-2022
+# Final Project, B.Sc. - Color Detection Device / Roy Ben Avraham 2021-2022
+
 
 # Short Description:
 This project was carried out as part of an internal engineering design (final project) consisting of two parts: Engineering Design A and Engineering Design B at the "Ort Braude Academic College of Engineering" located in Karmiel.
@@ -85,9 +85,26 @@ This camera is suitable for the needs of this project and the images it produces
 
 Sensors:     
 
-- Ultrasonic distance sensor - HC-SR04: ![image](https://user-images.githubusercontent.com/105777016/190323042-7425bae4-0509-44a3-8859-55baffe5b4b8.png)
+![image](https://user-images.githubusercontent.com/105777016/190323042-7425bae4-0509-44a3-8859-55baffe5b4b8.png)
+- Ultrasonic distance sensor - HC-SR04: 
 allows to measure the distance from the camera lens to the object. This sensor is installed close to the camera lens in order to find the distance of the object from the lens and not necessarily from the device itself. The sensor will make sure that the distance of the lens does not exceed one meter from the camera lens and will be connected directly to the GPIO (General Purpose Input/Output) of the Raspberry Pi controller.
 
-- Lighting sensor (module) - LDR (Light Dependent Resistor): ![image](https://user-images.githubusercontent.com/105777016/190323059-b072b8f5-1b63-4281-9b25-e8bb9ababd83.png)
+![image](https://user-images.githubusercontent.com/105777016/190323059-b072b8f5-1b63-4281-9b25-e8bb9ababd83.png)
+- Lighting sensor (module) - LDR (Light Dependent Resistor): 
  This sensor is actually a resistor whose resistance changes according to the intensity of the illumination on its surface. With the help of a potentiometer installed on the module, it is possible to determine the threshold level from which any illuminance will be considered bright or dark. The measured illuminance is analog and converted to digital using the module to which the sensor is soldered, this feature makes working with this module easy since the Raspberry Pi controller has no analog pins. If the read illuminance value is below the set threshold (ie dark) the flash lighting system made of white LED lights will be turned on.
+
+
+# User Interface
+
+In the device implemented in this project, there is a combination of audio and video in order to make it easier for the end user to opereate and allow as wide a range of users as possible to use the device.
+
+![image](https://user-images.githubusercontent.com/105777016/190323512-cfc81a24-5100-4b83-ac90-0e11d0c1c807.png)
+
+
+- Video - On the screen the user will be shown the detected color and other messages stored on the Arduino nano controller. The brightness of the display can be changed by moving the potentiometer. The selected screen type is LCD 16X2 model: HD44780.
+
+![image](https://user-images.githubusercontent.com/105777016/190323535-d7f568bd-3ae4-41b3-82cd-2b9515c69424.png)
+
+
+- Audio - voice messages saved on the Arduino nano controller will be played on the speaker. The selected speaker has the parameters: 1 [Watt], 8 [Ω] and has a maximum audio volume of about 85dB. This speaker is amplified with an audio amplifier based on the LM386 component and is connected to the Raspberry Pi controller through the 3.5mm analog audio connector.
 
