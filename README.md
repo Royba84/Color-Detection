@@ -20,4 +20,12 @@ In order to achieve the goals of this project, a variety of sensors are used tha
 
 # Block diagram
 
+![image](https://user-images.githubusercontent.com/105777016/190319969-8a83d7aa-52bb-4f45-b5d9-0407dbf8fe41.png)
 
+### Planning and development stages 
+
+# Platform
+![image](https://user-images.githubusercontent.com/105777016/190320285-f11e5c6c-2ca5-47d7-9449-0cd0f7c12719.png)
+The platform chosen for implementation of this project is Raspberry Pi OS (also known as: "Raspbian"). The controller was programmed using the Python programming language, version 3.7.3. This programming language is the optimized and recommended language for working with this controller. For the Arduino nano controller the platform is Arduino IDE and the programming language for this controller is C++. OpenCV version 3.2 was used for the image processing operations.
+
+OpenCV (Open-Source Computer Vision Library) - is a set of libraries for computer vision and image processing distributed as open source.
